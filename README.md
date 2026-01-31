@@ -82,7 +82,7 @@ First, you must update the robot library on the device.
 
 ```bash
 # Copy the fixed library to the device's lib folder
-mpremote connect /dev/ttyUSB0 fs cp fixed/ACB_Biped_Robot.py :libs/ACB_Biped_Robot.py
+mpremote connect /dev/ttyUSB0 fs cp fixed/libs/ACB_Biped_Robot.py :libs/ACB_Biped_Robot.py
 ```
 
 _Note: Ensure the destination path `:libs/` exists. If not, create it first using `fs mkdir :libs`._
