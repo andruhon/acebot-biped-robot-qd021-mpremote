@@ -1,0 +1,4 @@
+readonly/libs/*.py
+readonly/python/lesson*/
+readonly/python/*.py
+readonly/*.bin

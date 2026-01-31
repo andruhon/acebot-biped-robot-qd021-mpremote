@@ -1,6 +1,13 @@
-# Acebot Biped Controller
+# Acebott Biped Controller
+
+Acebott QD021 Bionic Biped Robot Kit for Arduino ESP32 Electronic Toy Programming
+https://acebott.com/product/acebott-qd021-bionic-biped-robot-kit-for-arduino-esp32-electronic-toy-programming/
 
 This project contains the code for controlling a biped robot using MicroPython.
+
+Original code provided with robot has some pin allocation and motion matrix issues,
+causing robot not to move properly and to limp badly.
+Fixed files are provided in the [fixed](fixed) directory.
 
 ## Using mpremote
 
