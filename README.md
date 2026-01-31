@@ -9,6 +9,8 @@ Original code provided with robot has some pin allocation and motion matrix issu
 causing robot not to move properly and to limp badly.
 Fixed files are provided in the [fixed](fixed) directory.
 
+![Acebott QD021](assets/robot-solo.png)
+
 ## Using mpremote
 
 `mpremote` is a command-line tool that provides utilities to interact with MicroPython devices over a serial connection. It allows you to manage the filesystem, run scripts, and access the REPL.
