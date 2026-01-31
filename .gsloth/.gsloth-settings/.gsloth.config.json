@@ -1,0 +1,7 @@
+{
+  "llm": {
+    "type": "openrouter",
+    "model": "qwen/qwen3-coder:online"
+  },
+  "projectGuidelines": "AGENTS.md"
+}

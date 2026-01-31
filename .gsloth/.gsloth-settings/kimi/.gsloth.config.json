@@ -1,0 +1,7 @@
+{
+  "llm": {
+    "type": "openrouter",
+    "model": "moonshotai/kimi-k2.5"
+  },
+  "projectGuidelines": "AGENTS.md"
+}
