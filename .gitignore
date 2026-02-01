@@ -3,3 +3,4 @@ readonly/python/lesson*/
 readonly/python/*.py
 readonly/*.bin
 .idea
+.gsloth/gth_*
