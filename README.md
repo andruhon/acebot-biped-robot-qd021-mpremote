@@ -5,6 +5,9 @@ https://acebott.com/product/acebott-qd021-bionic-biped-robot-kit-for-arduino-esp
 
 This project contains the code for controlling a biped robot using MicroPython.
 
+> [!NOTE]
+> **Vendor Note:** A summary of the critical fixes applied to this codebase can be found in [FIXES_SUMMARY.md](FIXES_SUMMARY.md).
+
 Original code provided with robot has some pin allocation and motion matrix issues,
 causing robot not to move properly and to limp badly.
 Fixed files are provided in the [fixed](fixed) directory.
