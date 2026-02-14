@@ -20,6 +20,11 @@ Fixed files are provided in the [fixed](fixed) directory.
 
 See [INSTALLATION.md](INSTALLATION.md) for installation instructions.
 
+## AI assistance
+
+Once the installation is complete [Gaunt Sloth](https://gaunt-sloth-assistant.github.io/),
+may be used to do deployments to the robot with simple commands like "deploy lesson 5" or "run lesson 1".
+
 ### Connecting to a Device
 
 To list available devices, use:

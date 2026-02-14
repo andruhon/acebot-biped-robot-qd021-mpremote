@@ -3,5 +3,37 @@
     "type": "openrouter",
     "model": "qwen/qwen3-coder:online"
   },
-  "projectGuidelines": "AGENTS.md"
+  "projectGuidelines": "AGENTS.md",
+  "customTools": {
+    "deploy_lesson": {
+      "command": "mpremote connect ${usbDevice} fs cp ${lesson} :main.py",
+      "description": "Deploy lesson to the robot.",
+      "parameters": {
+        "usbDevice": {
+          "description": "Usb device of robot. Use `/dev/ttyUSB0` unless advised to use other divce.",
+          "allow": ["absolute-paths"]
+        },
+        "lesson": {
+          "description": "Lesson to deploy, for example `fixed/lesson2/Move_Forward.py`"
+        }
+      }
+    },
+    "run_lesson": {
+      "command": "mpremote connect ${usbDevice} run ${lesson}",
+      "description": "Run lesson once, without saving it in robot's memory.",
+      "parameters": {
+        "usbDevice": {
+          "description": "Usb device of robot. Use `/dev/ttyUSB0` unless advised to use other divce.",
+          "allow": ["absolute-paths"]
+        },
+        "lesson": {
+          "description": "Lesson to deploy, for example `fixed/lesson2/Move_Forward.py`"
+        }
+      }
+    },
+    "list_devices": {
+      "command": "mpremote connect list",
+      "description": "List devices available to mpremote. The Acebot Biped is usually detected as 1a86:7523 serial USB device"
+    }
+  }
 }

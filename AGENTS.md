@@ -18,3 +18,32 @@ Robot is based on ESP32 and has four MG90S servos.
 - Lesson 6: Dance Routine 2
 - Lesson 7: Web-based Control Interface
 - Lesson 8: Mobile App Control Interface
+
+## Deploying lesson
+
+If you were asked to deploy or upload a lesson, figure out the correct file from `fixed` directory and use `deploy_lesson` command to deploy it.
+
+### Example 1
+
+User: deploy lesson 5
+You:
+list `fixed`
+list `fixed/lesson5`
+deploy_lesson /dev/ttyUSB0 fixed/lesson5/Move_Dance1.py
+
+The expected output
+cp fixed/lesson5/Move_Dance1.py :main.py
+
+### Example 2
+
+User: upload avoid program
+You:
+list `fixed`
+list `fixed/lesson4`
+deploy_lesson /dev/ttyUSB0 fixed/lesson4/Move_Avoid.py
+
+The expected output
+cp fixed/lesson4/Move_Avoid.py :main.py
+
+### Troubleshooting
+If something goes wrong with deployment list devices if it seems like device ttyUSB0 didn't work; Check README.md, INSTALLATION.md, try guiding user to find the solution.

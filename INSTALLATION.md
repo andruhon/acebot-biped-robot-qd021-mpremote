@@ -74,6 +74,17 @@ The library files are located in `./readonly/libs/`:
 - `ACB_Biped_Robot.py` - Main robot control library
 - `ultrasonic.py` - Ultrasonic sensor library
 
+## Install Gaunt Sloth (optional)
+
+[Gaunt Sloth](https://gaunt-sloth-assistant.github.io/) can help with deploying lessons to the robot.
+
+*Prerequesites:*
+- Gaunt Sloth needs [Node JS](https://nodejs.org/) to be installed.
+- Gaunt Sloth needs OpenRouter API key as `OPEN_ROUTER_API_KEY` environment variable.
+
+*Gaunt Sloth Installation*
+`npm install gaunt-sloth-assistant -g`
+
 ### Connect to the robot
 
 First, find the serial port of your robot:
