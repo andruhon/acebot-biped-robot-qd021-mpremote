@@ -1,0 +1,7 @@
+{
+  "reportMissingImports": "none",
+  "reportUnknownMemberType": "none",
+  "reportAttributeAccessIssue": "none",
+  "reportUnknownVariableType": "none",
+  "reportUndefinedVariable": "none",
+}

@@ -69,13 +69,15 @@ right = [
     [90, 90, 80, 90, 150],
 ]
 
-
+# Runs forever
 while True:
     
+    # Read distance from sensor
     UT_distance = Ultrasonic.get_distance()
-    if UT_distance <= 15:
+    if UT_distance <= 15: # IF distance is less than 15 cm
         stop()
 
+        # Step back 6 steps
         Servo_PROGRAM_Run(backward, len(backward))
         Servo_PROGRAM_Run(backward, len(backward))
         Servo_PROGRAM_Run(backward, len(backward))
@@ -83,15 +85,16 @@ while True:
         Servo_PROGRAM_Run(backward, len(backward))
         Servo_PROGRAM_Run(backward, len(backward))
             
-        rand_number = random.randint(1, 2)
-        if rand_number == 1:
+        # Choose random number 1 or 2    
+        rand_number = random.randint(1, 2)        
+        if rand_number == 1: # If 1 turn left
             for _ in range(5):  # Repeat five times
                 Servo_PROGRAM_Run(left, len(left))
                 time.sleep(0.5)
-        elif rand_number == 2:
+        elif rand_number == 2: # If 2 turn right
             for _ in range(5):  # Repeat five times
                 Servo_PROGRAM_Run(right, len(right))
                 time.sleep(0.5)
                     
     else:
-        Servo_PROGRAM_Run(forward, len(forward))
+        Servo_PROGRAM_Run(forward, len(forward)) # Keep walking forward
