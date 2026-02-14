@@ -47,3 +47,7 @@ cp fixed/lesson4/Move_Avoid.py :main.py
 
 ### Troubleshooting
 If something goes wrong with deployment list devices if it seems like device ttyUSB0 didn't work; Check README.md, INSTALLATION.md, try guiding user to find the solution.
+
+### Stopping the robot
+
+If user wants to "stop the robot" RUN lesson 1, it will set all servos to neutral positions (use run_lesson).

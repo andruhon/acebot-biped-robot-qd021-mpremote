@@ -20,7 +20,8 @@
     },
     "run_lesson": {
       "command": "mpremote connect ${usbDevice} run ${lesson}",
-      "description": "Run lesson once, without saving it in robot's memory.",
+      "description": "Run lesson once, without saving it in robot's memory (times out in 10 seconds, but programm will keep running).",
+      "timeout": 10,
       "parameters": {
         "usbDevice": {
           "description": "Usb device of robot. Use `/dev/ttyUSB0` unless advised to use other divce.",
