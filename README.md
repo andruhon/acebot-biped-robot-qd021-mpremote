@@ -28,6 +28,8 @@ See [INSTALLATION.md](INSTALLATION.md) for installation instructions.
 Once the installation is complete [Gaunt Sloth](https://gaunt-sloth-assistant.github.io/),
 may be used to do deployments to the robot with simple commands like "deploy lesson 5" or "run lesson 1".
 
+When Gaunt Sloth is installed type `gth` in your terminal and chat with your assistant about the robot.
+
 ### Connecting to a Device
 
 To list available devices, use:
