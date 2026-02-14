@@ -93,10 +93,18 @@ First, find the serial port of your robot:
 mpremote connect list
 ```
 
+The robot typically appears as:
+- **Linux/Mac**: `/dev/ttyUSB0` (or `/dev/ttyUSB1`, `/dev/ttyACM0`, etc.)
+- **Windows**: `COM3`, `COM4`, or similar
+
 Connect to the robot (replace `/dev/ttyUSB0` with your actual port):
 
 ```bash
+# Linux/Mac
 mpremote connect /dev/ttyUSB0
+
+# Windows
+mpremote connect COM3
 ```
 
 ### Upload the library files
@@ -150,4 +158,51 @@ mpremote cp ./readonly/python/lesson1/servo_90.py :lessons/
 
 # Or upload all lessons
 for d in ./readonly/python/lesson*/; do mpremote cp "${d}"*.py :lessons/; done
+```
+
+### Using fixed lesson versions (recommended)
+
+The `fixed` directory contains corrected and improved versions of the original lessons. These versions include motion matrix bug fix.
+See https://youtu.be/KKA3subxwx4
+
+**⚠️ Important: Deploy the fixed library first!**
+
+The fixed lessons require the updated `ACB_Biped_Robot.py` library from the `fixed/libs/` directory. Deploy it before running any fixed lessons:
+
+```bash
+# Upload the fixed library (required for all fixed lessons)
+mpremote connect /dev/ttyUSB0 cp fixed/libs/ACB_Biped_Robot.py :libs/
+```
+
+To deploy a fixed lesson as the main program:
+
+```bash
+# Deploy a fixed lesson to run on startup (becomes main.py on the robot)
+mpremote connect /dev/ttyUSB0 fs cp fixed/lesson2/Move_Forward.py :main.py
+```
+
+To run a fixed lesson once without saving it:
+
+```bash
+# Run a lesson temporarily (does not persist after reboot)
+mpremote connect /dev/ttyUSB0 run fixed/lesson5/Move_Dance1.py
+```
+
+**Available fixed lessons:**
+- `fixed/lesson1/` - Basic servo initialization
+- `fixed/lesson2/` - Movement and serial control (Move Forward, Backward, Turn Left/Right)
+- `fixed/lesson3/` - Ultrasonic sensor following
+- `fixed/lesson4/` - Obstacle avoidance
+- `fixed/lesson5/` - Dance Routine 1
+- `fixed/lesson6/` - Dance Routine 2
+- `fixed/lesson7/` - Web-based control interface
+- `fixed/lesson8/` - Mobile app control interface
+
+**Note:** If you've installed Gaunt Sloth, you can use simpler commands like:
+```bash
+# First, deploy the fixed library
+mpremote connect /dev/ttyUSB0 cp fixed/libs/ACB_Biped_Robot.py :libs/
+
+# Then deploy lessons
+gs "deploy lesson 5"
 ```

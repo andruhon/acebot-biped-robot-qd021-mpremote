@@ -14,6 +14,9 @@ Fixed files are provided in the [fixed](fixed) directory.
 
 ![Acebott QD021](assets/robot-solo.png)
 
+Watch our YouTube playlist of us building and coding the Robot:
+https://www.youtube.com/playlist?list=PLJbQUtf-xvhuh_HpCuMb0itskndtWDs_y
+
 ## Using mpremote
 
 `mpremote` is a command-line tool that provides utilities to interact with MicroPython devices over a serial connection. It allows you to manage the filesystem, run scripts, and access the REPL.
