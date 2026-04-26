@@ -117,3 +117,86 @@ Or copy them to the device for autonomous execution:
 ```bash
 mpremote connect /dev/ttyUSB0 fs cp fixed/lesson2/Move_Forward.py :main.py
 ```
+
+## Deploying the Agent Build
+
+The [for-agents](for-agents) directory contains a web server intended to be driven by an AI agent rather than a human in a browser. Endpoints are named after the action they perform (so an LLM can't confuse a magic number for the wrong command), and movement endpoints accept an optional `?steps=N` parameter.
+
+> **Not compatible with the lesson7 `/control?var=robot&val=N` protocol.** This is a clean break — no `/control` route exists.
+
+### Endpoints
+
+All endpoints are `GET`. Each call blocks until the action finishes, then returns a small JSON or plain-text body.
+
+**Movement** (`?steps=N`, default `1`, capped at `10`):
+
+| endpoint      | what it does          |
+| ------------- | --------------------- |
+| `/forward`    | walk forward          |
+| `/backward`   | walk backward         |
+| `/turn_left`  | rotate left in place  |
+| `/turn_right` | rotate right in place |
+| `/stop`       | freeze servos         |
+
+Approximate calibration on a flat smooth surface: 1 forward/backward cycle ≈ 1.5 cm of travel; 8 turn cycles ≈ 90° of rotation.
+
+**Sensing:**
+
+| endpoint    | returns                                                                                              |
+| ----------- | ---------------------------------------------------------------------------------------------------- |
+| `/distance` | ultrasonic reading in cm (plain text; `-1.0` on failure)                                             |
+| `/status`   | JSON `{uptimeMs, lastCommand, lastSteps, lastCommandAtMs, lastDistanceCm}`                           |
+
+**Trick moves** (single cycle, no `steps` parameter):
+
+| endpoint        | endpoint         |
+| --------------- | ---------------- |
+| `/sprint`       | `/dance`         |
+| `/avoid`        | `/follow`        |
+| `/kick_left`    | `/kick_right`    |
+| `/tilt_left`    | `/tilt_right`    |
+| `/stamp_left`   | `/stamp_right`   |
+| `/ankles_left`  | `/ankles_right`  |
+
+Make sure the fixed library is already on the device (see [Update the Library](#1-update-the-library)).
+
+### Optional: also join your WiFi
+
+By default the robot only exposes its own access point (`Biped_Robot` / `12345678`), so the dev machine has to disconnect from the internet to talk to it. The agent build can additionally join your existing WiFi (home, classroom, club) as a station — the AP stays up as a fallback, and you get a second IP on your LAN.
+
+To enable, copy the example credentials file, fill in your SSID and password, and copy it to the device:
+
+```bash
+cp for-agents/wifi_config.example.py for-agents/wifi_config.py
+# edit for-agents/wifi_config.py with your SSID and password
+mpremote connect /dev/ttyUSB0 fs cp for-agents/wifi_config.py :wifi_config.py
+```
+
+`for-agents/wifi_config.py` is gitignored. If the file is absent on the device, the robot runs in AP-only mode (same as before). The boot log prints both IPs (or just the AP IP if STA fails or no config exists).
+
+### Run the program
+
+Run the agent program directly:
+
+```bash
+mpremote connect /dev/ttyUSB0 run for-agents/Biped_Robot_Web.py
+```
+
+Or copy it as `main.py` so the robot starts the agent server on every power-on:
+
+```bash
+mpremote connect /dev/ttyUSB0 fs cp for-agents/Biped_Robot_Web.py :main.py
+```
+
+Once running, the robot exposes its access point `Biped_Robot` (password `12345678`). Connect to that network and the device's HTTP server is reachable at `http://192.168.4.1/` — visiting the root prints a one-page summary of the available endpoints. Quick smoke test:
+
+```bash
+curl 'http://192.168.4.1/distance'
+# -> e.g. "23.4"
+
+curl 'http://192.168.4.1/status'
+# -> {"uptimeMs": 12345, "lastCommand": "forward", "lastSteps": 2, ...}
+
+curl 'http://192.168.4.1/forward?steps=2'
+# -> {"action": "forward", "steps": 2}
+```

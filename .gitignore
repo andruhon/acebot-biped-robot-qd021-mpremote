@@ -4,3 +4,6 @@ readonly/python/*.py
 readonly/*.bin
 .idea
 .gsloth/gth_*
+
+# User-supplied WiFi station credentials for the agent build.
+for-agents/wifi_config.py
