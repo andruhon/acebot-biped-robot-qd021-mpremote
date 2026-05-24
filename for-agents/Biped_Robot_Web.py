@@ -133,6 +133,9 @@ def send_response(client, body='', status='200 OK', content_type='text/plain'):
         "HTTP/1.1 {}\r\n"
         "Content-Type: {}\r\n"
         "Content-Length: {}\r\n"
+        "Access-Control-Allow-Origin: *\r\n"
+        "Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n"
+        "Access-Control-Allow-Headers: Content-Type\r\n"
         "Connection: close\r\n"
         "\r\n"
     ).format(status, content_type, len(body_bytes))
@@ -219,6 +222,12 @@ def handle_http_connection(client):
         if len(part) < 1024:
             break
     request_str = request.decode('utf-8')
+
+    if request_str.startswith('OPTIONS'):
+        # CORS preflight from the browser. Headers are emitted unconditionally
+        # by send_response(); a 204 with empty body is sufficient.
+        send_response(client, '', status='204 No Content')
+        return
 
     if not request_str.startswith('GET'):
         send_response(client, 'method not allowed', status='405 Method Not Allowed')
