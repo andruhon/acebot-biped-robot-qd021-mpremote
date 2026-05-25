@@ -12,7 +12,6 @@
 #     /backward[?steps=N]   walk backward
 #     /turn_left[?steps=N]  rotate left in place
 #     /turn_right[?steps=N] rotate right in place
-#     /stop                 freeze servos (no steps)
 #
 #     Approximate calibration on a flat smooth surface:
 #       - 1 forward / backward cycle ~ 1.5 cm of travel
@@ -176,8 +175,7 @@ def run_trick(client, name, motion_fn):
 ROOT_BODY = (
     "Acebott biped robot - agent API.\n\n"
     "Movement (?steps=N optional, max {max}):\n"
-    "  GET /forward, /backward, /turn_left, /turn_right\n"
-    "  GET /stop\n\n"
+    "  GET /forward, /backward, /turn_left, /turn_right\n\n"
     "Sensing:\n"
     "  GET /distance     ultrasonic reading in cm (plain text)\n"
     "  GET /status       JSON heartbeat\n\n"
@@ -267,12 +265,6 @@ def handle_http_connection(client):
         except Exception as e:
             print('Distance read error:', e)
             send_response(client, '-1.0')
-        return
-
-    if endpoint == '/stop':
-        record_command('stop', 0)
-        stop()
-        send_response(client, json.dumps({'action': 'stop'}), content_type='application/json')
         return
 
     if endpoint in MOVEMENTS:
